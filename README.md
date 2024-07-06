@@ -25,6 +25,17 @@ Find `SETPWD`, check `Enable login` and set the password.
    API version | `UDMP-unifiOS`
    Schedule | `*/5 * * * *`
 
-### TODO
+### Configure publishers
 
-Configure publishers
+**MQTT Publisher**
+
+Name | Value
+---- | -----
+When to run | `always_after-scan`
+MQTT broker URL | `mqtt.my_domain`
+MQTT broker port | `1883`
+MQTT user | `mqtt_user`
+MQTT passwword | 
+Device ID | `netalertx`
+Device name | `NetAlertX`
+Send devices | ✓

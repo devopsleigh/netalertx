@@ -3,12 +3,12 @@ services:
   netalertx:
     container_name: netalertx
     hostname: netalertx
-    privileged: true
     image: jokobsk/netalertx:latest
+    restart: unless-stopped
+    privileged: true
     environment:
       - TZ=${TZ}
       - PORT=80
-    restart: unless-stopped
     volumes:
       - ./db:/app/db
       - ./config:/app/config
