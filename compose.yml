@@ -15,20 +15,25 @@ services:
     security_opt:
       - no-new-privileges:true
     networks:
-      proxy:
+      - proxy
     labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.${SERVICE_NAME}.entrypoints=http"
-      - "traefik.http.routers.${SERVICE_NAME}.rule=Host(`${SERVICE_NAME}.${MY_DOMAIN}`)"
-      - "traefik.http.routers.${SERVICE_NAME}.middlewares=default-whitelist@file"
-      - "traefik.http.middlewares.${SERVICE_NAME}-https-redirect.redirectscheme.scheme=https"
-      - "traefik.http.routers.${SERVICE_NAME}.middlewares=${SERVICE_NAME}-https-redirect"
-      - "traefik.http.routers.${SERVICE_NAME}-secure.entrypoints=https"
-      - "traefik.http.routers.${SERVICE_NAME}-secure.rule=Host(`${SERVICE_NAME}.${MY_DOMAIN}`)"
-      - "traefik.http.routers.${SERVICE_NAME}-secure.tls=true"
-      - "traefik.http.routers.${SERVICE_NAME}-secure.service=${SERVICE_NAME}"
-      - "traefik.http.services.${SERVICE_NAME}.loadbalancer.server.port=${SERVICE_INTERNAL_PORT}"
-      - "traefik.docker.network=proxy"
+      - homepage.name=NetAlertX
+      - homepage.description=Rogue network device alerting
+      - homepage.icon=pi-alert.png
+      - homepage.href=https://${SERVICE_NAME}.${MY_DOMAIN}
+      - homepage.group=Monitoring
+      - traefik.enable=true
+      - traefik.http.routers.${SERVICE_NAME}.entrypoints=http
+      - traefik.http.routers.${SERVICE_NAME}.rule=Host(`${SERVICE_NAME}.${MY_DOMAIN}`)
+      - traefik.http.routers.${SERVICE_NAME}.middlewares=default-whitelist@file
+      - traefik.http.middlewares.${SERVICE_NAME}-https-redirect.redirectscheme.scheme=https
+      - traefik.http.routers.${SERVICE_NAME}.middlewares=${SERVICE_NAME}-https-redirect
+      - traefik.http.routers.${SERVICE_NAME}-secure.entrypoints=https
+      - traefik.http.routers.${SERVICE_NAME}-secure.rule=Host(`${SERVICE_NAME}.${MY_DOMAIN}`)
+      - traefik.http.routers.${SERVICE_NAME}-secure.tls=true
+      - traefik.http.routers.${SERVICE_NAME}-secure.service=${SERVICE_NAME}
+      - traefik.http.services.${SERVICE_NAME}.loadbalancer.server.port=${SERVICE_INTERNAL_PORT}
+      - traefik.docker.network=proxy
 
 networks:
   proxy:
